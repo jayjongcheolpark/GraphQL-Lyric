@@ -3,6 +3,7 @@ import { graphql } from 'react-apollo'
 import { Link } from 'react-router'
 
 import fetchSong from '../queries/fetchSong'
+import LyricCreate from './LyricCreate'
 
 class SongDetail extends Component {
   render() {
@@ -11,6 +12,7 @@ class SongDetail extends Component {
       <div>
         <Link to="/">Back</Link>
         <h3>{data.loading || data.song.title}</h3>
+        <LyricCreate />
       </div>
     )
   }
