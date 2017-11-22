@@ -9,11 +9,14 @@ import LyricList from './LyricList'
 class SongDetail extends Component {
   render() {
     const { data } = this.props
+    if (data.loading) {
+      return <div></div>
+    }
     return (
       <div>
         <Link to="/">Back</Link>
-        <h3>{data.loading || data.song.title}</h3>
-        <LyricList />
+        <h3>{data.song.title}</h3>
+        <LyricList lyrics={data.song.lyrics} />
         <LyricCreate songId={this.props.params.id} />
       </div>
     )
