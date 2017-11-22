@@ -2,8 +2,14 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 import { Link } from 'react-router'
+import styled from 'styled-components'
 
 import query from '../queries/fetchSongs'
+
+const Li = styled.li`
+  display: flex;
+  justify-content: space-between;
+`
 
 class SongList extends Component {
   onSongDelete(id) {
@@ -15,12 +21,12 @@ class SongList extends Component {
   renderSongs() {
     return this.props.data.songs.map(({ id, title }) => {
       return (
-        <li key={id} className="collection-item">
+        <Li key={id} className="collection-item">
           {title}
           <i className="material-icons" onClick={() => this.onSongDelete(id)}>
             delete
           </i>
-        </li>
+        </Li>
       )
     })
   }
