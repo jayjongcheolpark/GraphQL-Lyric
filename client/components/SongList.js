@@ -7,7 +7,9 @@ import query from '../queries/fetchSongs'
 
 class SongList extends Component {
   onSongDelete(id) {
-    this.props.deleteSong({ variables: { id } })
+    this.props
+      .deleteSong({ variables: { id } })
+      .then(() => this.props.data.refetch())
   }
 
   renderSongs() {
@@ -15,10 +17,7 @@ class SongList extends Component {
       return (
         <li key={id} className="collection-item">
           {title}
-          <i
-            className="material-icons"
-            onClick={() => this.onSongDelete(id)}
-          >
+          <i className="material-icons" onClick={() => this.onSongDelete(id)}>
             delete
           </i>
         </li>
@@ -32,7 +31,10 @@ class SongList extends Component {
         <ul className="collection">
           {this.props.data.loading || this.renderSongs()}
         </ul>
-        <Link to="/songs/new" className="btn-floating btn-large red right">
+        <Link
+          to="/songs/new"
+          className="btn-floating btn-large red right"
+         >
           <i className="material-icons">add</i>
         </Link>
       </div>
