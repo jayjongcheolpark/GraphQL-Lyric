@@ -18,8 +18,18 @@ const Div = styled.div`
 `
 
 class LyricList extends Component {
-  onLike(id) {
-    this.props.likeLyric({ variables: { id } })
+  onLike(id, likes) {
+    this.props.likeLyric({
+      variables: { id },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        likeLyric: {
+          id,
+          __typename: 'LyricType',
+          likes: likes + 1
+        }
+      }
+    })
   }
 
   renderLyrics() {
@@ -34,7 +44,7 @@ class LyricList extends Component {
             {likes}
             <I
               className="material-icons"
-              onClick={() => this.onLike(id)}
+              onClick={() => this.onLike(id, likes)}
             >
               thumb_up
             </I>
